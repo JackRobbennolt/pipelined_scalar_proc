@@ -55,43 +55,79 @@ always @(*) begin
                         7'b000_0000: alu_op = ALU_ADD;
                         7'b010_0000: alu_op = ALU_SUB;
                         //7'b000_0001: MUL goes here later
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
                 end
                 3'b001: begin
                     case (funct7)
                         7'b000_0000: alu_op = ALU_SLL;
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
                 end
                 3'b010: begin
                     case (funct7)
                         7'b000_0000: alu_op = ALU_SLT;
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
                 end
                 3'b011: begin
                     case (funct7)
                         7'b000_0000: alu_op = ALU_SLTU;
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
                 end
                 3'b100: begin
                     case (funct7)
                         7'b000_0000: alu_op = ALU_XOR;
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
                 end
                 3'b101: begin
                     case (funct7)
                         7'b000_0000: alu_op = ALU_SRL;
                         7'b010_0000: alu_op = ALU_SRA;
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
                 end
                 3'b110: begin
                     case (funct7)
                         7'b000_0000: alu_op = ALU_OR;
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
                 end
                 3'b111: begin
                     case (funct7)
                         7'b000_0000: alu_op = ALU_AND;
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
+                end
+                default: begin
+                    illegal_instruction = 1;
+                    halt = 1;
                 end
             endcase
         end
@@ -105,18 +141,34 @@ always @(*) begin
                         7'b000_0000: alu_op = ALU_ADD;
                         7'b010_0000: alu_op = ALU_SUB;
                         //7'b000_0001: MULW goes here later
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
                 end
                 3'b001: begin
                     case (funct7)
                         7'b000_0000: alu_op = ALU_SLL;
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
                 end
                 3'b101: begin
                     case (funct7)
                         7'b000_0000: alu_op = ALU_SRL;
                         7'b010_0000: alu_op = ALU_SRA;
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
+                end
+                default: begin
+                    illegal_instruction = 1;
+                    halt = 1;
                 end
             endcase
         end
@@ -138,13 +190,25 @@ always @(*) begin
                 3'b001: begin
                     case (funct7[6:1])
                         6'b000_000: alu_op = ALU_SLL; //SLLI
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
                 end
                 3'b101: begin
                     case (funct7[6:1])
                         6'b000_000: alu_op = ALU_SRL; //SRLI
                         6'b010_000: alu_op = ALU_SRA; //SRAI
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
+                end
+                default: begin
+                    illegal_instruction = 1;
+                    halt = 1;
                 end
             endcase
         end
@@ -161,13 +225,25 @@ always @(*) begin
                 3'b001: begin
                     case (funct7)
                         7'b000_0000: alu_op = ALU_SLL; //SLLIW
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
                 end
                 3'b101: begin
                     case (funct7)
                         7'b000_0000: alu_op = ALU_SRL; //SRLIW
                         7'b010_0000: alu_op = ALU_SRA; //SRAIW
+                        default: begin
+                            illegal_instruction = 1;
+                            halt = 1;
+                        end
                     endcase
+                end
+                default: begin
+                    illegal_instruction = 1;
+                    halt = 1;
                 end
             endcase
         end
