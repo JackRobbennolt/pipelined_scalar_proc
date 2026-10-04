@@ -121,8 +121,6 @@ always @ (posedge clk) begin
     if ((!freeze && !halt) || reset) begin
         if(reset || flush) begin
             id_currentpc    <=   64'd0;
-        end
-        if(flush) begin
             flushed_in_if    <=   1'b1;
         end
         else begin
@@ -304,7 +302,7 @@ ControlUnit control(
 );
 
 RegFile regfile(
-    .write_enable(wb_reg_write),
+    .write_enable(wb_reg_write && !halt),
     .clk(clk),
     .rs1(id_instruction[19:15]),
     .rs2(id_instruction[24:20]),
